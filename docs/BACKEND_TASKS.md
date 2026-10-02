@@ -23,13 +23,15 @@ Do the stages in order. Each stage ends with a **✔ check**; the stage is done 
 
 ## Stage 0 — Fix what is broken
 
-- [ ] `compose.yaml` line 22: `SPRIbooNG_DATASOURCE_URL` → `SPRING_DATASOURCE_URL`.
-- [ ] `BookRepository`: `existsByIsbn` must return `boolean`. `findByIsbn` → `Optional<Book>`.
-- [ ] Replace field `@Autowired` with `private final` fields and a constructor in `BookService` and `BookController`.
-- [ ] Make `ErrorResponse` a record: `timestamp`, `status`, `error`, `message`, `fieldErrors` (nullable map). Use it in `GlobalExceptionHandler` instead of the `Map`.
-- [ ] `Book`: `id` → `Long`, `publishedYear` → `Integer`. Remove `price` and `applyDiscount()` (BookHub has no prices). Base `equals`/`hashCode` on `id`, not ISBN, because ISBN becomes optional.
-- [ ] Remove the REST Docs dependencies and the asciidoctor plugin from `pom.xml`.
-- [ ] Update `TODO.md` and `README.md`: untick items that are not done, fix `/api/books` → `/api/v1/books`, and drop the discount, exporter, Member and Loan stages.
+- [x] `compose.yaml` line 22: `SPRIbooNG_DATASOURCE_URL` → `SPRING_DATASOURCE_URL`.
+- [x] `BookRepository`: `existsByIsbn` must return `boolean`. `findByIsbn` → `Optional<Book>`.
+- [x] Replace field `@Autowired` with `private final` fields and a constructor in `BookService` and `BookController`.
+- [x] Make `ErrorResponse` a record: `timestamp`, `status`, `error`, `message`, `fieldErrors` (nullable map). Use it in `GlobalExceptionHandler` instead of the `Map`.
+- [x] `Book`: `id` → `Long`. Remove `price` and `applyDiscount()` (BookHub has no prices). Base `equals`/`hashCode` on `id`, not ISBN, because ISBN becomes optional.
+- [x] Remove the REST Docs dependencies and the asciidoctor plugin from `pom.xml`.
+- [x] Update `TODO.md` and `README.md`: tick what is really done, fix `/api/books` → `/api/v1/books`, drop price and discount.
+- [ ] `Book.publishedYear` → `Integer`. Deferred to Stage 1: it changes a column type, which needs a Flyway migration.
+- [ ] Drop the exporter, Member and Loan stages (G and H) from `TODO.md` if you agree they are out of scope.
 
 ✔ `docker compose up --build` starts both containers and `curl localhost:8080/api/v1/books` returns `[]` or a list.
 
